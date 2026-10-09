@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Barang Hilang/Temuan — WargaHub{% endblock %}
+{% block content %}
+<div class="form-shell">
+  <a href="{{ url_for('index') }}" class="back-link">← Kembali ke beranda</a>
+  <h1 class="section-title mt-3">Barang Hilang / Temuan</h1>
+  <p class="text-secondary">Bagikan informasi agar warga bisa saling membantu.</p>
+  <form method="post" class="mt-4">
+    <label class="form-label">Nama barang *</label><input name="item" class="form-control" required maxlength="120">
+    <label class="form-label mt-3">Jenis informasi *</label><select name="kind" class="form-select" required><option>Barang Hilang</option><option>Barang Ditemukan</option></select>
+    <label class="form-label mt-3">Lokasi / area *</label><input name="location" class="form-control" required maxlength="200">
+    <label class="form-label mt-3">Nomor WhatsApp / telepon *</label><input name="phone" class="form-control" required placeholder="Contoh: 081234567890">
+    <label class="form-label mt-3">Keterangan</label><textarea name="description" class="form-control" rows="4" maxlength="1000" placeholder="Warna, ciri umum, atau waktu ditemukan. Jangan cantumkan PIN atau data sensitif."></textarea>
+    <div class="form-text">Nomor kontak akan terlihat oleh pengunjung. Jangan publikasikan nomor orang lain tanpa izin.</div>
+    <button class="btn btn-brand mt-4" type="submit">Simpan Informasi</button>
+  </form>
+</div>
+{% endblock %}

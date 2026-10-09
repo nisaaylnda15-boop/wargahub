@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Laporan Warga — WargaHub{% endblock %}
+{% block content %}
+<div class="form-shell">
+  <a href="{{ url_for('index') }}" class="back-link">← Kembali ke beranda</a>
+  <h1 class="section-title mt-3">Laporan Lingkungan</h1>
+  <p class="text-secondary">Catat masalah yang membutuhkan perhatian masyarakat atau pengurus setempat.</p>
+  <form method="post" class="mt-4">
+    <label class="form-label">Judul masalah *</label><input name="title" class="form-control" required maxlength="120">
+    <label class="form-label mt-3">Kategori *</label><select name="category" class="form-select" required><option>Kebersihan</option><option>Fasilitas Umum</option><option>Keamanan</option><option>Jalan & Transportasi</option><option>Lainnya</option></select>
+    <label class="form-label mt-3">Lokasi *</label><input name="location" class="form-control" required maxlength="200">
+    <label class="form-label mt-3">Keterangan</label><textarea name="description" class="form-control" rows="4" maxlength="1000"></textarea>
+    <button class="btn btn-brand mt-4" type="submit">Kirim Laporan</button>
+  </form>
+</div>
+{% endblock %}

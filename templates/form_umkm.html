@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Daftarkan UMKM — WargaHub{% endblock %}
+{% block content %}
+<div class="form-shell">
+  <a href="{{ url_for('index') }}" class="back-link">← Kembali ke beranda</a>
+  <h1 class="section-title mt-3">Daftarkan UMKM</h1>
+  <p class="text-secondary">Bantu warga menemukan usaha dan jasa lokal Anda.</p>
+  <form method="post" class="mt-4">
+    <label class="form-label">Nama usaha *</label><input name="name" class="form-control" required maxlength="100">
+    <label class="form-label mt-3">Kategori *</label>
+    <select name="category" class="form-select" required><option value="">Pilih kategori</option><option>Kuliner</option><option>Toko & Sembako</option><option>Jasa</option><option>Kerajinan</option><option>Pertanian</option><option>Lainnya</option></select>
+    <label class="form-label mt-3">Alamat / lokasi *</label><input name="address" class="form-control" required maxlength="200">
+    <label class="form-label mt-3">Nomor WhatsApp / telepon *</label><input name="phone" class="form-control" required placeholder="Contoh: 081234567890">
+    <label class="form-label mt-3">Deskripsi usaha</label><textarea name="description" class="form-control" rows="4" maxlength="1000"></textarea>
+    <div class="form-text">Nomor kontak akan terlihat oleh pengunjung. Pastikan pemilik nomor menyetujui publikasi.</div>
+    <button class="btn btn-brand mt-4" type="submit">Simpan UMKM</button>
+  </form>
+</div>
+{% endblock %}

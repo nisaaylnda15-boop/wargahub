@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}WargaHub — Layanan Masyarakat{% endblock %}
+{% block content %}
+<section class="hero p-4 p-md-5 mb-4">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <span class="eyebrow">LAYANAN MASYARAKAT</span>
+      <h1 class="display-5 fw-bold mt-2">Satu aplikasi.<br>Lingkungan lebih peduli.</h1>
+      <p class="lead mb-0">Temukan usaha lokal, bagikan informasi barang hilang, dan laporkan masalah di sekitar.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0"><span class="hero-icon">🏘️</span></div>
+  </div>
+</section>
+{% if error %}<div class="alert alert-warning">{{ error }}</div>{% endif %}
+<form class="searchbar mb-4" method="get" action="{{ url_for('index') }}">
+  <div class="input-group input-group-lg">
+    <input class="form-control" name="q" value="{{ q }}" placeholder="Cari UMKM, barang, atau laporan...">
+    <button class="btn btn-brand" type="submit">Cari</button>
+  </div>
+</form>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="section-title mb-0">UMKM & Jasa Sekitar</h2><a class="btn btn-outline-brand btn-sm" href="{{ url_for('add_umkm') }}">+ Tambah UMKM</a>
+</div>
+<div class="row g-3 mb-5">
+{% for b in businesses %}
+  <div class="col-md-6 col-xl-4"><article class="info-card h-100">
+    <span class="pill">{{ b.category }}</span><h3>{{ b.name }}</h3>
+    <p class="muted mb-1">📍 {{ b.address }}</p><p>{{ b.description or 'Belum ada deskripsi.' }}</p>
+    <div class="d-flex flex-wrap gap-2 mt-auto">
+      <a class="btn btn-brand btn-sm" target="_blank" rel="noopener" href="https://wa.me/{{ b.phone|replace('+','')|replace(' ','')|replace('-','')|replace('(','')|replace(')','') }}?text=Halo%2C%20saya%20menemukan%20usaha%20Anda%20di%20WargaHub.">WhatsApp</a>
+      <a class="btn btn-outline-brand btn-sm" href="tel:{{ b.phone }}">Telepon</a>
+    </div>
+  </article></div>
+{% else %}<div class="col-12"><div class="empty-state">Belum ada UMKM yang ditambahkan. Jadilah yang pertama mendaftarkan usaha lokal.</div></div>{% endfor %}
+</div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="section-title mb-0">Barang Hilang & Temuan</h2><a class="btn btn-outline-brand btn-sm" href="{{ url_for('add_lost_found') }}">+ Tambah Informasi</a>
+</div>
+<div class="row g-3 mb-5">
+{% for item in lost_items %}
+  <div class="col-md-6 col-xl-4"><article class="info-card h-100">
+    <span class="pill">{{ item.kind }}</span><h3>{{ item.item }}</h3>
+    <p class="muted mb-1">📍 {{ item.location }}</p><p>{{ item.description or 'Tidak ada keterangan tambahan.' }}</p>
+    <div class="d-flex flex-wrap gap-2 mt-auto">
+      <a class="btn btn-brand btn-sm" target="_blank" rel="noopener" href="https://wa.me/{{ item.phone|replace('+','')|replace(' ','')|replace('-','')|replace('(','')|replace(')','') }}?text=Halo%2C%20saya%20menghubungi%20terkait%20informasi%20barang%20di%20WargaHub.">WhatsApp</a>
+      <a class="btn btn-outline-brand btn-sm" href="tel:{{ item.phone }}">Telepon</a>
+    </div>
+  </article></div>
+{% else %}<div class="col-12"><div class="empty-state">Belum ada informasi barang hilang/temuan.</div></div>{% endfor %}
+</div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="section-title mb-0">Laporan Lingkungan</h2><a class="btn btn-outline-brand btn-sm" href="{{ url_for('add_report') }}">+ Buat Laporan</a>
+</div>
+<div class="row g-3">
+{% for r in reports %}
+  <div class="col-md-6"><article class="info-card">
+    <span class="pill">{{ r.category }}</span><h3>{{ r.title }}</h3>
+    <p class="muted mb-1">📍 {{ r.location }}</p><p>{{ r.description or 'Tidak ada keterangan tambahan.' }}</p>
+    <span class="status">Status: {{ r.status }}</span>
+  </article></div>
+{% else %}<div class="col-12"><div class="empty-state">Belum ada laporan lingkungan.</div></div>{% endfor %}
+</div>
+{% endblock %}
